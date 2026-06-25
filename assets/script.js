@@ -31,14 +31,30 @@ c('.task-input').addEventListener('keyup', (e) => {
         let lista = c('.to-do ul');
 
         if(input !== '') {
-            //let li = document.createElement('li');
-            let li = lista.innerHTML = '<input type="checkbox"><li></li>';
-            li.innerText = input;
+            let li = document.createElement('li');
 
-            li.addEventListener('click', () => {
+            let checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+
+            li.addEventListener('change', () => {
                  li.classList.toggle('concluida');
             })
 
+            let span = document.createElement('span');
+            span.innerText = input;
+
+            let btrRemover = document.createElement('button');
+            btrRemover.innerText = 'X';
+            btrRemover.classList.add('btn-remover');
+
+            btrRemover.addEventListener('click', (e) => {
+                e.stopPropagation(); // Evita que o evento de clique no botão se propague para o li
+                li.remove();
+            })
+
+            li.appendChild(checkbox);
+            li.appendChild(span); 
+            li.appendChild(btrRemover); 
 
             lista.appendChild(li);
             c('.task-input').value = ''

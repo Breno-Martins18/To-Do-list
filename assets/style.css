@@ -68,12 +68,28 @@ body {
     font-size: 25px;
 }
 li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+
     list-style: none;
-    font-size: 25px;
     color: #4a4848;
     cursor: pointer;
 }
 
+li span {
+    flex: 1; /* Faz o texto ocupar todo o espaço sobrando, empurrando o botão para o fim */
+}
+.btn-remover {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
 
 
 
@@ -106,4 +122,8 @@ li {
 .concluida {
     text-decoration: line-through;
     opacity: 0.3;
+}
+.concluida span {
+    text-decoration: line-through;
+    opacity: 0.5;
 }
