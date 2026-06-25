@@ -2,43 +2,49 @@
 const c = (el) => document.querySelector(el);
 
 let meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+let days = ['Dom.', 'Seg.', 'Ter.', 'Qua.', 'Qui', 'Sex.', 'Sáb.',];
 
 const hoje = new Date();
-let dia = hoje.getDay();
+let dia = days[hoje.getDay()];
 let mes = meses[hoje.getMonth()];
 let ano = hoje.getFullYear();
-let datahoje = `${dia} de ${mes} de ${ano}`;
-let data = c('.img span').innerHTML = `${datahoje}`;
+let datahoje = `${dia}., ${mes} de ${ano}`;
+
+let data = c('.img span').innerText = `${datahoje}`;
 
 
 
 
 // FUNÇÕES
+// 1. Mostrar o campo de input ao clicar no botão "+"
+
 c('.task-img').addEventListener('click', () => {
     c('.task-input').style.display = 'block';
     c('.task-img').style.display = 'none';
+    c('.task-input').focus(); // Dá foco automático para começar a digitar
 })
 
-
-c('.task-input').addEventListener('keypress', (e) => {
+// 2. Adicionar tarefa ao apertar Enter
+c('.task-input').addEventListener('keyup', (e) => {
     if(e.key === 'Enter') {
-        let input = c('.task-input').value;
-        let vazio = c('.to-do ul');
+        let input = c('.task-input').value.trim(); // trim() remove espaços inúteis
+        let lista = c('.to-do ul');
 
         if(input !== '') {
-            let li = document.createElement('li');
-            li.innerHTML = input;
+            //let li = document.createElement('li');
+            let li = lista.innerHTML = '<input type="checkbox"><li></li>';
+            li.innerText = input;
 
             li.addEventListener('click', () => {
-                li.style.textDecoration = 'line-through';
+                 li.classList.toggle('concluida');
             })
 
 
-            c('.to-do ul').appendChild(li);
+            lista.appendChild(li);
             c('.task-input').value = ''
         }
         
-        if(vazio.children.length > 0) {
+        if(lista.children.length > 0) {
             c('.title').innerHTML = 'SEUS AFAZERES';
         }
     }
